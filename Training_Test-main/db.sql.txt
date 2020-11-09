@@ -1,0 +1,63 @@
+CREATE TABLE `user` (
+  `username` varchar(15) NOT NULL,
+  `password` varchar(10) NOT NULL
+) ;
+
+
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`username`);
+
+
+
+CREATE TABLE `loan_info` (
+  `applno` int(11) NOT NULL,
+  `purpose` varchar(50) DEFAULT NULL,
+  `amtrequest` float DEFAULT NULL,
+  `doa` date DEFAULT NULL,
+  `bstructure` varchar(15) DEFAULT NULL,
+  `bindicator` varchar(15) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `email` varchar(20) DEFAULT NULL,
+  `mobile` varchar(10) DEFAULT NULL,
+  `status` varchar(15) DEFAULT NULL,
+  `taxpayer` varchar(3) DEFAULT NULL
+);
+
+
+ALTER TABLE `loan_info`
+  ADD PRIMARY KEY (`applno`);
+
+CREATE TABLE `approved_loan` (
+  `applno` int(11) NOT NULL,
+  `amotsanctioned` float DEFAULT NULL,
+  `loanterm` int(2) DEFAULT NULL,
+  `psd` date DEFAULT NULL,
+  `lcd` date DEFAULT NULL,
+  `emi` float NOT NULL DEFAULT 0
+);
+
+ALTER TABLE `approved_loan`
+  ADD PRIMARY KEY (`applno`);
+
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`username`);
+
+
+
+--------- Insert Queries ------------------
+
+INSERT INTO `user` (`username`, `password`) VALUES
+('admin', 'admin'),
+('user1', 'user1');
+
+
+INSERT INTO `approved_loan` (`applno`, `amotsanctioned`, `loanterm`, `psd`, `lcd`, `emi`) VALUES
+    -> (1, 100000, 2, '2020-11-11', '2022-02-12', 500),
+    -> (3, 0, 0, '2020-11-11', '2020-12-12', 0);
+
+
+INSERT INTO `loan_info` (`applno`, `purpose`, `amtrequest`, `doa`, `bstructure`, `bindicator`, `address`, `email`, `mobile`, `status`, `taxpayer`) VALUES
+(1, 'Purchase New Villa', 10000000, '2020-11-11', 'Individual', 'salary', 'D-1, Hill Top Colony, 500094', 'test@gmail.com', '4154152134', 'Processed', 'Y'),
+(2, 'Construct Brand New House', 5000000, '2020-11-11', 'individual', 'salary', 'D-2,303 GK- Enclave,50009', 'test@hotmail', '9159159152', 'Processed', 'N'),
+(3, 'But Farm', 800000, '2020-11-08', 'individual', 'salary', 'D-2,Ramky Enclave', 'test@yahoo.co.in', '7097091777', 'Initiated', 'Y'),
+(4, 'Buy Farm House', 2500000, '2020-11-08', 'Organization', 'Business', 'XYZ, 500291', 'org123@mail.com', '9000000000', 'Approved', 'N');
